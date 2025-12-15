@@ -1,0 +1,26 @@
+pipeline {
+    agent any
+
+    triggers {
+        pollSCM('* * * * *')
+    }
+
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git url: 'https://github.com/1ms24mc111/poll-scm.git', branch: 'master'
+            }
+        }
+        stage('Build') {
+            steps {
+                sh 'javac hello.java'
+            }
+        }
+        stage('Run') {
+            steps {
+                sh 'java hello'
+            }
+        }
+    }
+}
